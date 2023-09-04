@@ -60,3 +60,37 @@ Vim can be exited from the default mode in one of several ways:
 - :q exits if no changes were made
 - :wq exits saving the changes
 - :q! exits discarding the changes
+
+## Using commands in the shell
+
+We have already used some commands before, let's look at them in more detail. When using commands, the line consists of the command name, flags and arguments. For example, `ls -l /home/ubuntu` has them in that exact order. The name of the command shows which command we are using, the flags set some options to tweak how the command will be executed and the argument is the input for the command itself. In this case, we are using the ls (list) command, -l means we want the long output and /home/ubuntu is the path to the directory which the list command will use. We can use multiple flags and/or multiple arguments, but using none can also work when there are defaults.
+
+How to know which flags and arguments are supported by the commands? Sometimes the -h or --help flags can help. More information is usually provided by the man (manual) command, providing a detailed manual for using the command. Try starting with `man man`. Relying on this can be more effective than googling, especially considering the implementations of certain commands can be different depending on the system.
+
+## Redirecting input and output
+
+Some commands may take text as input or you may want to redirect the output to a file. This can be done with < and > operators.
+
+```
+# use file as input for the command
+$ cat < file.txt
+
+# save output to a file (overwrite contents)
+$ ls > file.txt
+
+# append output to a file - try running it multiple times
+$ ls >> file.txt
+
+# heredoc - provide a multiline file in-place
+$ cat << EOF
+> bla
+> bla bla
+> EOF
+
+# provide string as input
+$ cat <<< "bla"
+```
+
+## Text filtering and manipulation
+
+Some files may be too long to look through completely - sometimes we need to filter out just what we need. Less can help, we can use /bla (and press enter) to search for occurrences of bla in the file. Typing n will take us to the next occurrence and typing N will take us to the previous one. Another tool we can use is grep - providing it with the string we are looking for and giving text as input, it will output only the lines containing that text
